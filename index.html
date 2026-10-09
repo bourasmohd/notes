@@ -3,216 +3,228 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-GK45n4EYK8nekW6cd7GV3yDMWNby1VpisIWimfG/F4A=' 'sha256-rMfkFFWoB2W1/Zx+4bgHim0WC7vKRVrq6FTeZclH1Z4=' 'sha256-DeWnDxXWjJ1XYHr56UzwGRdshdanp1ec3Ib382dwXHU='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src https://*.supabase.co data: blob:; connect-src https://*.supabase.co; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-GK45n4EYK8nekW6cd7GV3yDMWNby1VpisIWimfG/F4A=' 'sha256-rMfkFFWoB2W1/Zx+4bgHim0WC7vKRVrq6FTeZclH1Z4=' 'sha256-nYSB5Q1eWZhdmgXcvyFhDZDZyAa7VsEQkBIZh7Es+yQ='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src https://*.supabase.co data: blob:; connect-src https://*.supabase.co; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
-<meta name="theme-color" content="#0e1f2f">
-<title>Workshop notes competition</title>
+<meta name="theme-color" content="#000000">
+<title>Mapping the Islamic Sciences</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Literata:opsz,wght@7..72,500;7..72,650&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..900,0..100,0..1&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+/* Palette and type taken from the "Mapping the Islamic Sciences" poster:
+   black ground, manuscript gold, white chips, soft heavy serif for display, tracked caps for labels. */
 :root {
-  --paper: #e9eef1;
-  --surface: #ffffff;
-  --ink: #0e1f2f;
-  --ink-soft: #4a5b6b;
-  --line: #cbd6dd;
-  --lapis: #234e8c;
-  --lapis-dark: #183a6b;
-  --verdigris: #12806e;
-  --saffron: #f2b632;
-  --madder: #b3372f;
+  --black: #000000;
+  --surface: #141414;
+  --surface-2: #1d1d1d;
+  --line: #2e2e2e;
+  --gold: #e8c26a;
+  --gold-bright: #f3d384;
+  --gold-ink: #3b2e0e;
+  --paper: #ffffff;
+  --text: #f6f3ec;
+  --muted: #aaa498;
+  --on-light: #111111;
+  --danger: #f08c7c;
 
-  --serif: "Literata", Georgia, "Times New Roman", serif;
-  --sans: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --sans: "Outfit", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
   --step--1: 0.875rem;
   --step-0: 1rem;
   --step-1: 1.25rem;
   --step-2: 1.625rem;
-  --step-3: 2.125rem;
+  --step-3: 2.25rem;
+  --track: 0.12em;
 }
 
 * { box-sizing: border-box; }
-
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; background: var(--black); }
 
 body {
   margin: 0;
-  background: var(--paper);
-  color: var(--ink);
-  font: 400 var(--step-0) / 1.5 var(--sans);
+  background: var(--black);
+  color: var(--text);
+  font: 400 var(--step-0) / 1.55 var(--sans);
   min-height: 100vh;
   padding-bottom: env(safe-area-inset-bottom);
 }
 
 h1, h2, h3 {
-  font-family: var(--serif);
-  font-weight: 650;
-  line-height: 1.2;
+  font-family: var(--display);
+  font-weight: 800;
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+  line-height: 1.08;
   margin: 0;
-  letter-spacing: -0.01em;
+  color: var(--gold);
 }
 h1 { font-size: var(--step-3); }
 h2 { font-size: var(--step-2); }
 h3 { font-size: var(--step-1); }
-
 p { margin: 0; }
-a { color: var(--lapis); }
+a { color: var(--gold); }
 ul, ol { margin: 0; padding: 0; list-style: none; }
 
-:focus-visible {
-  outline: 3px solid var(--lapis);
-  outline-offset: 2px;
-  border-radius: 4px;
+:focus-visible { outline: 3px solid var(--gold-bright); outline-offset: 3px; border-radius: 4px; }
+
+.muted { color: var(--muted); }
+.small { font-size: var(--step--1); }
+.caps {
+  font-family: var(--sans);
+  text-transform: uppercase;
+  letter-spacing: var(--track);
+  font-weight: 600;
 }
+.offscreen { position: fixed; left: -9999px; top: 0; width: 1px; height: 1px; opacity: 0; }
 
-.muted { color: var(--ink-soft); }
-
-/* ---------- page frame ---------- */
+/* ---------- frame ---------- */
 .bar {
-  background: var(--ink);
-  color: #fff;
+  background: var(--black);
+  border-bottom: 1px solid var(--line);
   padding: 12px max(16px, env(safe-area-inset-left));
 }
 .bar-inner {
-  max-width: 720px;
+  max-width: 760px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
 }
-.bar a { color: #fff; text-decoration: none; }
-.bar .brand { font-family: var(--serif); font-weight: 650; font-size: 1.0625rem; }
+.bar a { text-decoration: none; }
+.bar .brand {
+  font-family: var(--display);
+  font-weight: 800;
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+  font-size: 1.125rem;
+  color: var(--gold);
+  line-height: 1.2;
+}
 .bar .nav a {
-  padding: 8px 12px;
+  display: inline-block;
+  padding: 8px 14px;
   border-radius: 999px;
+  border: 1.5px solid var(--gold);
+  color: var(--gold);
   font-weight: 500;
   font-size: var(--step--1);
-  background: rgba(255, 255, 255, 0.12);
+  white-space: nowrap;
 }
-.bar .nav a:hover { background: rgba(255, 255, 255, 0.22); }
-.bar :focus-visible { outline-color: var(--saffron); }
+.bar .nav a:hover { background: rgba(232, 194, 106, 0.12); }
 
-main {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 24px 16px 56px;
-}
-main.wide { max-width: 1040px; }
-
-.foot {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 0 16px 32px;
-  font-size: var(--step--1);
-  color: var(--ink-soft);
-}
+main { max-width: 760px; margin: 0 auto; padding: 24px 16px 56px; }
+main.wide { max-width: 1120px; }
+.bar.wide .bar-inner { max-width: 1088px; }
+.foot { max-width: 760px; margin: 0 auto; padding: 0 16px 32px; font-size: var(--step--1); }
+.foot a { color: var(--muted); }
 
 /* ---------- home ---------- */
-.intro { display: grid; gap: 12px; margin-bottom: 28px; }
-.intro p { max-width: 60ch; }
-.rules {
-  display: grid;
-  gap: 4px;
-  margin-top: 4px;
-  padding-left: 18px;
-  list-style: disc;
-  color: var(--ink-soft);
-  font-size: var(--step--1);
+.hero { display: grid; gap: 6px; margin: 8px 0 22px; }
+.hero .kicker { font-size: 1.125rem; color: var(--text); }
+.hero h1 {
+  font-size: clamp(3rem, 15vw, 5.4rem);
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: -0.015em;
+}
+.hero .sub { font-size: 1.125rem; color: var(--text); margin-top: 6px; }
+.hero .lead { margin-top: 14px; max-width: 46ch; font-size: 1.0625rem; color: var(--text); }
+
+.rules { display: grid; gap: 6px; margin: 0 0 30px; padding-left: 0; }
+.rules li { position: relative; padding-left: 22px; color: var(--muted); }
+.rules li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.62em;
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  transform: rotate(45deg);
 }
 
-.toc { border-top: 2px solid var(--ink); }
-.toc li { border-bottom: 1px solid var(--line); }
-.toc a {
+.section-label { font-size: var(--step--1); color: var(--text); margin-bottom: 12px; }
+
+.tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.tiles a {
   display: grid;
-  grid-template-columns: 2.4rem 1fr auto;
-  align-items: center;
-  gap: 8px 12px;
-  padding: 16px 4px;
+  align-content: center;
+  justify-items: center;
+  gap: 6px;
+  min-height: 132px;
+  padding: 16px 10px;
+  text-align: center;
   text-decoration: none;
-  color: inherit;
+  background: var(--paper);
+  color: var(--on-light);
 }
-.toc a:hover { background: rgba(255, 255, 255, 0.6); }
-.toc .num {
-  font-family: var(--serif);
-  font-size: var(--step-2);
-  font-weight: 500;
-  color: var(--lapis);
-  font-variant-numeric: lining-nums;
+/* gold and white in a checkerboard, as on the poster */
+.tiles li:nth-child(4n + 1) a,
+.tiles li:nth-child(4n + 4) a { background: var(--gold); }
+.tiles a:hover { filter: brightness(0.94); }
+.tiles .t {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.9375rem;
+  line-height: 1.25;
 }
-.toc .t { font-family: var(--serif); font-weight: 650; font-size: 1.125rem; line-height: 1.25; }
-.toc .who { color: var(--ink-soft); font-size: var(--step--1); }
-.toc .count {
-  font-size: var(--step--1);
-  color: var(--ink-soft);
-  text-align: right;
-  white-space: nowrap;
+.tiles .who { font-size: 0.8125rem; color: #3a3a3a; }
+.tiles .count {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #3a3a3a;
+}
+
+@media (min-width: 640px) {
+  .tiles { grid-template-columns: repeat(3, 1fr); }
+  .tiles li:nth-child(n) a { background: var(--paper); }
+  .tiles li:nth-child(odd) a { background: var(--gold); }
 }
 
 /* ---------- session page ---------- */
-.back {
-  display: inline-block;
-  margin-bottom: 14px;
-  font-size: var(--step--1);
-  font-weight: 500;
-}
-.head { display: grid; gap: 4px; margin-bottom: 20px; }
-
-.tabs {
-  display: flex;
-  gap: 4px;
-  border-bottom: 2px solid var(--ink);
-  margin-bottom: 16px;
-}
-.tabs a {
-  flex: 1;
-  text-align: center;
-  padding: 12px 6px;
-  text-decoration: none;
-  color: var(--ink);
-  font-weight: 500;
-  border-radius: 10px 10px 0 0;
-  background: rgba(255, 255, 255, 0.45);
-}
-.tabs a small { display: block; font-size: 0.8125rem; color: var(--ink-soft); font-weight: 400; }
-.tabs a[aria-current="page"] { background: var(--ink); color: #fff; }
-.tabs a[aria-current="page"] small { color: #c5d3df; }
+.back { display: inline-block; margin-bottom: 16px; font-size: var(--step--1); font-weight: 500; }
+.head { display: grid; gap: 8px; margin-bottom: 20px; }
+.head .kicker { font-size: var(--step--1); color: var(--muted); }
+.head h1 { font-size: clamp(2.25rem, 10vw, 3.25rem); font-weight: 900; }
+.head .who { color: var(--text); font-size: 1.0625rem; }
 
 .notice {
   padding: 10px 14px;
-  border-left: 4px solid var(--saffron);
-  background: #fff7e0;
+  border-left: 4px solid var(--gold);
+  background: rgba(232, 194, 106, 0.1);
   margin-bottom: 14px;
   font-size: var(--step--1);
 }
 
-.actions { margin-bottom: 18px; }
+.post-cta { display: grid; gap: 8px; justify-items: start; margin-bottom: 22px; }
+.post-cta p { font-size: var(--step--1); color: var(--muted); }
 
 .btn {
   font: 600 var(--step-0) / 1 var(--sans);
   min-height: 48px;
-  padding: 0 22px;
+  padding: 0 24px;
   border: 0;
   border-radius: 999px;
-  background: var(--lapis);
-  color: #fff;
+  background: var(--gold);
+  color: var(--on-light);
   cursor: pointer;
 }
-.btn:hover { background: var(--lapis-dark); }
-.btn:disabled { background: #94a3b3; cursor: not-allowed; }
-.btn.quiet { background: transparent; color: var(--lapis); box-shadow: inset 0 0 0 2px var(--lapis); }
-.btn.quiet:hover { background: rgba(35, 78, 140, 0.08); }
-.btn.small { min-height: 36px; padding: 0 14px; font-size: var(--step--1); }
+.btn:hover { background: var(--gold-bright); }
+.btn:disabled { background: #4a4a4a; color: #9a9a9a; cursor: not-allowed; }
+.btn.quiet { background: transparent; color: var(--gold); box-shadow: inset 0 0 0 1.5px var(--gold); }
+.btn.quiet:hover { background: rgba(232, 194, 106, 0.12); }
+.btn.small { min-height: 38px; padding: 0 16px; font-size: var(--step--1); }
+.btn.danger { background: transparent; color: var(--danger); box-shadow: inset 0 0 0 1.5px var(--danger); }
+.btn.danger:hover { background: rgba(240, 140, 124, 0.12); }
 .btn.link { display: inline-grid; align-items: center; text-decoration: none; }
-.lede { margin: 6px 0 24px; }
-.page-title { margin-bottom: 16px; }
-.section-title { margin-bottom: 12px; }
-.btn.danger { background: transparent; color: var(--madder); box-shadow: inset 0 0 0 2px var(--madder); }
-.btn.danger:hover { background: rgba(179, 55, 47, 0.08); }
 
-.entries { display: grid; gap: 12px; }
+.list-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 10px; }
+.list-head .caps { font-size: var(--step--1); }
+
+.entries { display: grid; gap: 10px; }
 .entry {
   display: grid;
   grid-template-columns: 2rem 84px 1fr;
@@ -223,20 +235,22 @@ main.wide { max-width: 1040px; }
   align-items: start;
   background: var(--surface);
   padding: 12px;
-  border-radius: 14px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
 }
-.entry.leader { box-shadow: inset 4px 0 0 var(--saffron); }
+.entry.leader { border-color: var(--gold); box-shadow: inset 4px 0 0 var(--gold); }
 .rank {
   grid-area: rank;
-  font-family: var(--serif);
+  font-family: var(--display);
+  font-weight: 800;
+  font-variation-settings: "SOFT" 100;
   font-size: var(--step-2);
-  font-weight: 500;
   line-height: 1;
   padding-top: 4px;
-  color: var(--ink-soft);
+  color: var(--muted);
   font-variant-numeric: lining-nums;
 }
-.leader .rank { color: var(--ink); }
+.leader .rank { color: var(--gold); }
 
 .thumb {
   grid-area: thumb;
@@ -244,41 +258,35 @@ main.wide { max-width: 1040px; }
   height: 84px;
   padding: 0;
   border: 0;
-  border-radius: 10px;
+  border-radius: 8px;
   overflow: hidden;
-  background: #dfe7ec;
+  background: var(--surface-2);
   cursor: pointer;
   display: grid;
   place-items: center;
-  color: var(--ink);
   text-decoration: none;
 }
 .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .thumb.pdf {
-  background: #f3dedb;
-  color: var(--madder);
-  font-weight: 600;
+  background: var(--paper);
+  color: var(--on-light);
+  font-weight: 700;
   font-size: var(--step--1);
+  letter-spacing: 0.08em;
   text-align: center;
-  line-height: 1.2;
+  line-height: 1.3;
 }
 
 .info { grid-area: info; min-width: 0; }
-.info .title {
-  font-family: var(--serif);
-  font-weight: 650;
-  font-size: 1.0625rem;
-  line-height: 1.25;
-  overflow-wrap: anywhere;
-}
-.info .by { color: var(--ink-soft); font-size: var(--step--1); overflow-wrap: anywhere; }
+.info .title { font-weight: 600; font-size: 1.0625rem; line-height: 1.3; overflow-wrap: anywhere; }
+.info .by { color: var(--muted); font-size: var(--step--1); overflow-wrap: anywhere; }
 .badge {
   display: inline-block;
   margin-left: 6px;
   padding: 1px 8px;
   border-radius: 999px;
-  background: #d9e6f5;
-  color: var(--lapis-dark);
+  background: rgba(232, 194, 106, 0.16);
+  color: var(--gold);
   font-size: 0.75rem;
   font-weight: 600;
 }
@@ -287,71 +295,92 @@ main.wide { max-width: 1040px; }
 .vote {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   min-height: 44px;
   padding: 0 16px;
   border-radius: 999px;
-  border: 2px solid var(--verdigris);
+  border: 1.5px solid var(--gold);
   background: transparent;
-  color: var(--verdigris);
+  color: var(--gold);
   font: 600 var(--step--1) / 1 var(--sans);
   cursor: pointer;
 }
 .vote .n {
-  font-family: var(--serif);
+  font-family: var(--display);
+  font-weight: 800;
   font-size: 1.125rem;
   font-variant-numeric: lining-nums;
 }
-.vote:hover:not(:disabled) { background: rgba(18, 128, 110, 0.1); }
-.vote[aria-pressed="true"] { background: var(--verdigris); color: #fff; }
-.vote:disabled { border-color: var(--line); color: var(--ink-soft); cursor: default; }
-.vote[aria-pressed="true"]:disabled { background: var(--verdigris); border-color: var(--verdigris); color: #fff; opacity: 0.7; }
+.vote:hover:not(:disabled) { background: rgba(232, 194, 106, 0.12); }
+.vote[aria-pressed="true"] { background: var(--gold); color: var(--on-light); }
+.vote[aria-pressed="true"]:hover:not(:disabled) { background: var(--gold-bright); }
+.vote:disabled { border-color: var(--line); color: var(--muted); cursor: default; }
 
 .empty {
   padding: 28px 16px;
   text-align: center;
-  background: rgba(255, 255, 255, 0.5);
-  border: 2px dashed var(--line);
-  border-radius: 14px;
-  color: var(--ink-soft);
+  border: 1.5px dashed var(--line);
+  border-radius: 12px;
+  color: var(--muted);
 }
 
-/* ---------- dialogs ---------- */
+/* ---------- dialogs and forms ---------- */
 dialog {
-  border: 0;
+  border: 1px solid var(--line);
   padding: 0;
-  border-radius: 18px;
+  border-radius: 16px;
   width: min(480px, calc(100vw - 24px));
   max-height: calc(100vh - 24px);
   background: var(--surface);
-  color: var(--ink);
+  color: var(--text);
 }
-dialog::backdrop { background: rgba(14, 31, 47, 0.6); }
+dialog::backdrop { background: rgba(0, 0, 0, 0.75); }
 .sheet { padding: 22px 20px 20px; display: grid; gap: 16px; }
 .field { display: grid; gap: 6px; }
 .field label { font-weight: 600; font-size: var(--step--1); }
-.field .hint { color: var(--ink-soft); font-size: 0.8125rem; }
-input[type="text"], input[type="password"] {
+.field .hint { color: var(--muted); font-size: 0.8125rem; }
+input[type="text"], input[type="password"], input[type="url"], select {
   font: inherit;
   min-height: 48px;
   padding: 0 14px;
-  border: 2px solid var(--line);
+  border: 1.5px solid var(--line);
   border-radius: 10px;
-  background: #fff;
-  color: var(--ink);
+  background: var(--black);
+  color: var(--text);
   width: 100%;
 }
-input[type="text"]:focus, input[type="password"]:focus { border-color: var(--lapis); outline: none; }
-input[type="file"] { font: inherit; width: 100%; }
-.error { color: var(--madder); font-weight: 500; font-size: var(--step--1); }
+input::placeholder { color: #6f6a61; }
+input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus, select:focus { border-color: var(--gold); outline: none; }
+input[type="file"] { font: inherit; width: 100%; color: var(--muted); }
+input[type="file"]::file-selector-button {
+  font: 600 var(--step--1) / 1 var(--sans);
+  margin-right: 12px;
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--on-light);
+}
+textarea.code {
+  width: 100%;
+  font: 0.8125rem/1.4 ui-monospace, Menlo, Consolas, monospace;
+  background: var(--black);
+  color: var(--text);
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+}
+.error { color: var(--danger); font-weight: 500; font-size: var(--step--1); }
+.error:empty { display: none; }
+.success { color: var(--gold); font-weight: 600; }
 .row { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; }
-progress { width: 100%; height: 10px; accent-color: var(--lapis); }
+.row.start { justify-content: flex-start; }
+progress { width: 100%; height: 8px; accent-color: var(--gold); }
 
 .lightbox { width: min(960px, 100vw - 16px); background: #000; }
 .lightbox img { display: block; width: 100%; max-height: calc(100vh - 90px); object-fit: contain; }
-.lightbox .row { padding: 10px; background: #000; }
-.lightbox .btn.quiet { color: #fff; box-shadow: inset 0 0 0 2px #fff; }
-.lightbox .btn.quiet:hover { background: rgba(255, 255, 255, 0.12); }
+.lightbox .row { padding: 10px; }
 
 .toast {
   position: fixed;
@@ -361,9 +390,9 @@ progress { width: 100%; height: 10px; accent-color: var(--lapis); }
   max-width: min(440px, calc(100vw - 32px));
   padding: 12px 18px;
   border-radius: 12px;
-  background: var(--ink);
-  color: #fff;
-  font-weight: 500;
+  background: var(--gold);
+  color: var(--on-light);
+  font-weight: 600;
   font-size: var(--step--1);
   opacity: 0;
   pointer-events: none;
@@ -373,35 +402,38 @@ progress { width: 100%; height: 10px; accent-color: var(--lapis); }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
 /* ---------- winners ---------- */
-.winners { display: grid; gap: 28px; }
-.w-session { display: grid; gap: 12px; }
-.w-session > header { border-bottom: 2px solid var(--ink); padding-bottom: 8px; }
-.w-session > header p { color: var(--ink-soft); font-size: var(--step--1); }
-.w-cats { display: grid; gap: 12px; }
-.w-cat { background: var(--surface); border-radius: 14px; padding: 14px; display: grid; gap: 10px; align-content: start; }
-.w-cat h3 { font-size: 1.0625rem; }
-.w-list { display: grid; gap: 10px; }
-.w-item { display: grid; grid-template-columns: 1.6rem 1fr auto; gap: 8px; align-items: start; }
+.winners-head { display: grid; gap: 6px; margin-bottom: 26px; }
+.winners-head h1 { font-size: clamp(2.75rem, 12vw, 4.5rem); font-weight: 900; }
+.winners { display: grid; gap: 14px; align-items: start; }
+.w-card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: grid; gap: 12px; align-content: start; }
+.w-card header { display: grid; gap: 2px; }
+.w-card .t { font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.9375rem; color: var(--text); }
+.w-card .who { color: var(--muted); font-size: var(--step--1); }
+.w-photo { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 8px; display: block; background: var(--surface-2); }
+.w-list { display: grid; gap: 8px; }
+.w-item { display: grid; grid-template-columns: 1.8rem 1fr auto; gap: 8px; align-items: start; padding: 6px 0; }
 .w-item .rank { grid-area: auto; font-size: var(--step-1); padding-top: 0; }
-.w-item.first { padding: 10px; margin: 0 -4px; border-radius: 10px; background: #fff3d1; }
-.w-item.first .rank { color: var(--ink); }
+.w-item.first { padding: 10px; margin: 0 -6px; border-radius: 10px; background: var(--gold); color: var(--on-light); }
+.w-item.first .rank, .w-item.first .by, .w-item.first .v { color: var(--on-light); }
 .w-item a { color: inherit; text-decoration: none; }
 .w-item a:hover { text-decoration: underline; }
-.w-item .t { font-weight: 600; overflow-wrap: anywhere; }
-.w-item .by { color: var(--ink-soft); font-size: var(--step--1); }
-.w-item .v { font-family: var(--serif); font-weight: 650; white-space: nowrap; }
-.w-photo { width: 100%; max-height: 180px; object-fit: cover; border-radius: 10px; display: block; margin-bottom: 4px; }
+.w-item .name { font-weight: 600; overflow-wrap: anywhere; }
+.w-item .by { color: var(--muted); font-size: var(--step--1); overflow-wrap: anywhere; }
+.w-item .v { font-family: var(--display); font-weight: 800; white-space: nowrap; color: var(--gold); }
 
-@media (min-width: 760px) {
-  .w-cats { grid-template-columns: repeat(3, 1fr); }
-}
+@media (min-width: 700px) { .winners { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .winners { grid-template-columns: repeat(3, 1fr); } }
 
-/* ---------- admin ---------- */
-.panel { background: var(--surface); border-radius: 14px; padding: 16px; display: grid; gap: 14px; margin-bottom: 20px; }
+/* ---------- setup and organiser ---------- */
+.lede { margin: 8px 0 24px; color: var(--muted); }
+.page-title { margin-bottom: 16px; }
+.section-title { margin: 8px 0 12px; }
+
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: grid; gap: 14px; margin-bottom: 20px; }
 .toggle { display: flex; align-items: center; gap: 12px; font-weight: 500; }
-.toggle input { width: 22px; height: 22px; accent-color: var(--lapis); }
+.toggle input { width: 22px; height: 22px; accent-color: var(--gold); }
 .admin-group { margin-bottom: 20px; }
-.admin-group h3 { margin-bottom: 8px; }
+.admin-group h3 { margin-bottom: 8px; font-size: 1.125rem; }
 .admin-row {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -410,48 +442,12 @@ progress { width: 100%; height: 10px; accent-color: var(--lapis); }
   padding: 10px 0;
   border-bottom: 1px solid var(--line);
 }
-.admin-row .t { font-weight: 600; overflow-wrap: anywhere; }
-.admin-row .by { grid-column: 1; color: var(--ink-soft); font-size: var(--step--1); }
+.admin-row .t { font-weight: 600; overflow-wrap: anywhere; color: var(--text); }
+.admin-row .by { grid-column: 1; color: var(--muted); font-size: var(--step--1); }
 .admin-row .btn { grid-column: 2; grid-row: 1 / span 2; }
 
-@media (prefers-reduced-motion: reduce) {
-  .toast { transition: none; }
-}
-
-/* ---------- additions for the Supabase version ---------- */
-.offscreen { position: fixed; left: -9999px; top: 0; width: 1px; height: 1px; opacity: 0; }
-.small { font-size: var(--step--1); }
-.success { color: var(--verdigris); font-weight: 600; }
-.row.start { justify-content: flex-start; }
-
-input[type="url"], select {
-  font: inherit;
-  min-height: 48px;
-  padding: 0 14px;
-  border: 2px solid var(--line);
-  border-radius: 10px;
-  background: #fff;
-  color: var(--ink);
-  width: 100%;
-}
-input[type="url"]:focus, select:focus { border-color: var(--lapis); outline: none; }
-textarea.code {
-  width: 100%;
-  font: 0.8125rem/1.4 ui-monospace, Menlo, Consolas, monospace;
-  border: 2px solid var(--line);
-  border-radius: 10px;
-  padding: 10px;
-  margin-top: 10px;
-}
-
 .steps { counter-reset: step; display: grid; gap: 28px; margin: 24px 0 28px; }
-.steps > li {
-  counter-increment: step;
-  position: relative;
-  padding-left: 48px;
-  display: grid;
-  gap: 12px;
-}
+.steps > li { counter-increment: step; position: relative; padding-left: 48px; display: grid; gap: 12px; }
 .steps > li::before {
   content: counter(step);
   position: absolute;
@@ -460,27 +456,31 @@ textarea.code {
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: var(--ink);
-  color: #fff;
+  background: var(--gold);
+  color: var(--on-light);
   display: grid;
   place-items: center;
-  font-family: var(--serif);
-  font-weight: 650;
+  font-family: var(--display);
+  font-weight: 800;
 }
 .steps h2 { font-size: var(--step-1); }
 .field-group { display: grid; gap: 14px; }
 
 .share { justify-items: start; }
-.qr { width: 220px; max-width: 100%; background: #fff; padding: 6px; border-radius: 10px; box-shadow: inset 0 0 0 1px var(--line); }
+.qr { width: 220px; max-width: 100%; background: #fff; padding: 8px; border-radius: 8px; }
 .qr svg { display: block; width: 100%; height: auto; }
-.link-text { font-size: var(--step--1); color: var(--ink-soft); overflow-wrap: anywhere; word-break: break-all; }
+.link-text { font-size: var(--step--1); color: var(--muted); overflow-wrap: anywhere; word-break: break-all; }
 
 .inline-form { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: end; }
 .inline-form .btn { min-height: 48px; }
-.danger-zone { box-shadow: inset 0 0 0 2px #e9c4c0; margin-top: 28px; }
+.danger-zone { border-color: #5a2f29; margin-top: 28px; }
 
 @media (max-width: 420px) {
   .inline-form { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast { transition: none; }
 }
 
 </style>
@@ -2808,7 +2808,7 @@ https://github.com/nodeca/pako/blob/main/LICENSE
   const FIXED_SUPABASE_URL = '';
   const FIXED_SUPABASE_KEY = '';
 
-  const SETUP_SQL = "-- Workshop notes competition: Supabase setup.\n-- Paste all of this into Supabase > SQL Editor and press Run.\n-- Safe to run again: it keeps existing entries and votes.\n\n-- ---------------------------------------------------------------- private tables\ncreate schema if not exists comp;\nrevoke all on schema comp from public, anon, authenticated;\n\ncreate table if not exists comp.config (\n  id int primary key default 1 check (id = 1),\n  event_title text not null default 'Workshop notes competition',\n  admin_pin text not null,\n  submissions_open boolean not null default true,\n  voting_open boolean not null default true\n);\n\ncreate table if not exists comp.sessions (\n  id int primary key,\n  title text not null,\n  instructor text not null default ''\n);\n\ncreate table if not exists comp.categories (\n  id text primary key,\n  label text not null,\n  sort int not null\n);\n\ncreate table if not exists comp.entries (\n  id uuid primary key default gen_random_uuid(),\n  session_id int not null references comp.sessions (id) on delete cascade,\n  category text not null references comp.categories (id),\n  name text not null,\n  title text not null default '',\n  kind text not null check (kind in ('image', 'pdf')),\n  file_path text not null,\n  thumb_path text,\n  owner text not null,\n  created_at timestamptz not null default now(),\n  unique (owner, session_id, category)\n);\n\ncreate table if not exists comp.votes (\n  voter text not null,\n  session_id int not null,\n  category text not null,\n  entry_id uuid not null references comp.entries (id) on delete cascade,\n  primary key (voter, session_id, category)\n);\ncreate index if not exists votes_entry_idx on comp.votes (entry_id);\n\ncreate table if not exists comp.admin_fails (\n  at timestamptz not null default now()\n);\n\nalter table comp.config enable row level security;\nalter table comp.sessions enable row level security;\nalter table comp.categories enable row level security;\nalter table comp.entries enable row level security;\nalter table comp.votes enable row level security;\nalter table comp.admin_fails enable row level security;\n\n-- ---------------------------------------------------------------- your sessions\ninsert into comp.sessions (id, title, instructor) values\n  (1, 'Why Do We Seek Knowledge?', 'Ust Mohamed Bouras'),\n  (2, 'Introduction to the Arabic Sciences', 'Sh Ibrahim Abu Saleh'),\n  (3, 'Introduction to the Qur’anic Sciences', 'Sh Abu Zaid Omran'),\n  (4, 'Introduction to Tazkiyah & Suluk', 'Sh Abdulqadir Jama'),\n  (5, 'Introduction to Aqidah', 'Sh Bahdon Robleh'),\n  (6, 'Introduction to Hadith', 'Sh Ibrahim Abu Saleh'),\n  (7, 'Introduction to the Seerah', 'Ust Mohamed Bouras'),\n  (8, 'Introduction to Mustalah al-Hadith', 'Sh Anwar Alahwazi'),\n  (9, 'Introduction to Fiqh & Usul al-Fiqh', 'Sh Ali Aljalabneh')\non conflict (id) do update set title = excluded.title, instructor = excluded.instructor;\n\ninsert into comp.categories (id, label, sort) values\n  ('summary', 'Summary', 1),\n  ('notes', 'Notes', 2),\n  ('mindmap', 'Mind map', 3)\non conflict (id) do update set label = excluded.label, sort = excluded.sort;\n\n-- An 8-digit organiser PIN, made once.\ninsert into comp.config (id, admin_pin)\nvalues (1, lpad(((('x' || substr(replace(gen_random_uuid()::text, '-', ''), 1, 8))::bit(32)::bigint) % 100000000)::text, 8, '0'))\non conflict (id) do nothing;\n\n-- ---------------------------------------------------------------- helpers (private)\ncreate or replace function comp.device_ok(p text) returns boolean\nlanguage sql immutable as $$ select coalesce(p ~ '^[a-zA-Z0-9-]{16,64}$', false) $$;\n\ncreate or replace function comp.clean(p text, n int) returns text\nlanguage sql immutable as $$\n  select left(btrim(regexp_replace(regexp_replace(coalesce(p, ''), '[[:cntrl:]]', ' ', 'g'), '\\s+', ' ', 'g')), n)\n$$;\n\ncreate or replace function comp.settings_json() returns jsonb\nlanguage sql stable set search_path = comp, pg_temp as $$\n  select jsonb_build_object('title', event_title, 'submissionsOpen', submissions_open, 'votingOpen', voting_open)\n  from comp.config where id = 1\n$$;\n\ncreate or replace function comp.entry_json(e comp.entries, p_device text) returns jsonb\nlanguage sql stable set search_path = comp, pg_temp as $$\n  select jsonb_build_object(\n    'id', e.id, 'session', e.session_id, 'category', e.category,\n    'name', e.name, 'title', e.title, 'kind', e.kind,\n    'file', e.file_path, 'thumb', e.thumb_path,\n    'votes', (select count(*) from comp.votes v where v.entry_id = e.id),\n    'createdAt', (extract(epoch from e.created_at) * 1000)::bigint,\n    'mine', coalesce(p_device \u003c> '' and e.owner = p_device, false))\n$$;\n\ncreate or replace function comp.pin_error(p_pin text) returns text\nlanguage plpgsql volatile set search_path = comp, pg_temp as $$\nbegin\n  delete from comp.admin_fails where at \u003c now() - interval '1 day';\n  if (select count(*) from comp.admin_fails where at > now() - interval '10 minutes') >= 20 then\n    return 'Too many wrong PINs. Wait 10 minutes and try again.';\n  end if;\n  if btrim(coalesce(p_pin, '')) = (select admin_pin from comp.config where id = 1) then\n    return null;\n  end if;\n  insert into comp.admin_fails default values;\n  return 'That PIN is not correct.';\nend $$;\n\n-- ---------------------------------------------------------------- public functions (what the website calls)\ncreate or replace function public.comp_overview() returns jsonb\nlanguage sql stable security definer set search_path = comp, pg_temp as $$\n  select jsonb_build_object(\n    'settings', comp.settings_json(),\n    'categories', (select jsonb_agg(jsonb_build_object('id', c.id, 'label', c.label) order by c.sort) from comp.categories c),\n    'sessions', coalesce((\n      select jsonb_agg(jsonb_build_object(\n        'id', s.id, 'title', s.title, 'instructor', s.instructor,\n        'counts', (select coalesce(jsonb_object_agg(c.id,\n                     (select count(*) from comp.entries e where e.session_id = s.id and e.category = c.id)), '{}'::jsonb)\n                   from comp.categories c)\n      ) order by s.id)\n      from comp.sessions s), '[]'::jsonb))\n$$;\n\ncreate or replace function public.comp_entries(p_session int, p_device text default '') returns jsonb\nlanguage plpgsql stable security definer set search_path = comp, pg_temp as $$\ndeclare\n  d text := case when comp.device_ok(p_device) then p_device else '' end;\nbegin\n  if not exists (select 1 from comp.sessions where id = p_session) then\n    raise exception 'That session does not exist.';\n  end if;\n  return jsonb_build_object(\n    'settings', comp.settings_json(),\n    'entries', coalesce((\n      select jsonb_agg(comp.entry_json(e, d) order by x.vc desc, e.created_at)\n      from comp.entries e\n      cross join lateral (select count(*) as vc from comp.votes v where v.entry_id = e.id) x\n      where e.session_id = p_session), '[]'::jsonb),\n    'myVotes', (\n      select coalesce(jsonb_object_agg(c.id, (\n        select to_jsonb(v.entry_id) from comp.votes v\n        where d \u003c> '' and v.voter = d and v.session_id = p_session and v.category = c.id)), '{}'::jsonb)\n      from comp.categories c));\nend $$;\n\ncreate or replace function public.comp_winners() returns jsonb\nlanguage sql stable security definer set search_path = comp, pg_temp as $$\n  select jsonb_build_object(\n    'settings', comp.settings_json(),\n    'sessions', coalesce((\n      select jsonb_agg(jsonb_build_object(\n        'id', s.id, 'title', s.title, 'instructor', s.instructor,\n        'categories', (\n          select jsonb_agg(jsonb_build_object(\n            'id', c.id, 'label', c.label,\n            'top', coalesce((\n              select jsonb_agg(t.j order by t.vc desc, t.created_at)\n              from (\n                select comp.entry_json(e, '') as j, x.vc, e.created_at\n                from comp.entries e\n                cross join lateral (select count(*) as vc from comp.votes v where v.entry_id = e.id) x\n                where e.session_id = s.id and e.category = c.id\n                order by x.vc desc, e.created_at\n                limit 3) t), '[]'::jsonb)\n          ) order by c.sort)\n          from comp.categories c)\n      ) order by s.id)\n      from comp.sessions s), '[]'::jsonb))\n$$;\n\ncreate or replace function public.comp_add_entry(\n  p_device text, p_session int, p_category text, p_name text, p_title text,\n  p_kind text, p_file text, p_thumb text default null\n) returns jsonb\nlanguage plpgsql volatile security definer set search_path = comp, pg_temp as $$\ndeclare\n  v_name text := comp.clean(p_name, 40);\n  v_title text := comp.clean(p_title, 80);\n  e comp.entries;\nbegin\n  if not (select submissions_open from comp.config where id = 1) then\n    raise exception 'Entries are closed.';\n  end if;\n  if not comp.device_ok(p_device) then\n    raise exception 'Reload the page and try again.';\n  end if;\n  if not exists (select 1 from comp.sessions where id = p_session)\n     or not exists (select 1 from comp.categories where id = p_category) then\n    raise exception 'Choose a session and category.';\n  end if;\n  if v_name = '' then\n    raise exception 'Enter your name.';\n  end if;\n  if p_kind = 'image' then\n    if coalesce(p_file, '') !~ '^[0-9a-f]{32}\\.jpg$' or coalesce(p_thumb, '') !~ '^[0-9a-f]{32}-t\\.jpg$' then\n      raise exception 'The upload could not be read. Try again.';\n    end if;\n  elsif p_kind = 'pdf' then\n    if coalesce(p_file, '') !~ '^[0-9a-f]{32}\\.pdf$' then\n      raise exception 'The upload could not be read. Try again.';\n    end if;\n    p_thumb := null;\n  else\n    raise exception 'Only photos and PDF files are accepted.';\n  end if;\n  if (select count(*) from comp.entries) >= 3000 then\n    raise exception 'The competition is full.';\n  end if;\n\n  insert into comp.entries (session_id, category, name, title, kind, file_path, thumb_path, owner)\n  values (p_session, p_category, v_name, v_title, p_kind, p_file, p_thumb, p_device)\n  on conflict (owner, session_id, category) do nothing\n  returning * into e;\n\n  if e.id is null then\n    raise exception 'You already posted here. Delete your entry first to replace it.';\n  end if;\n  return comp.entry_json(e, p_device);\nend $$;\n\ncreate or replace function public.comp_vote(p_device text, p_entry uuid) returns jsonb\nlanguage plpgsql volatile security definer set search_path = comp, pg_temp as $$\ndeclare\n  e comp.entries;\n  cur uuid;\nbegin\n  if not (select voting_open from comp.config where id = 1) then\n    raise exception 'Voting is closed.';\n  end if;\n  if not comp.device_ok(p_device) then\n    raise exception 'Reload the page and try again.';\n  end if;\n  select * into e from comp.entries where id = p_entry;\n  if e.id is null then\n    raise exception 'That entry no longer exists.';\n  end if;\n  if e.owner = p_device then\n    raise exception 'You can’t vote for your own entry.';\n  end if;\n\n  select entry_id into cur from comp.votes\n  where voter = p_device and session_id = e.session_id and category = e.category;\n\n  if cur = e.id then\n    delete from comp.votes where voter = p_device and session_id = e.session_id and category = e.category;\n    cur := null;\n  else\n    insert into comp.votes (voter, session_id, category, entry_id)\n    values (p_device, e.session_id, e.category, e.id)\n    on conflict (voter, session_id, category) do update set entry_id = excluded.entry_id;\n    cur := e.id;\n  end if;\n\n  return jsonb_build_object('myVote', cur, 'votes', (select count(*) from comp.votes where entry_id = e.id));\nend $$;\n\ncreate or replace function public.comp_delete_own(p_device text, p_entry uuid) returns jsonb\nlanguage plpgsql volatile security definer set search_path = comp, pg_temp as $$\ndeclare\n  gone uuid;\nbegin\n  if not comp.device_ok(p_device) then\n    raise exception 'You can only delete your own entries.';\n  end if;\n  delete from comp.entries where id = p_entry and owner = p_device returning id into gone;\n  if gone is null then\n    raise exception 'You can only delete your own entries.';\n  end if;\n  return jsonb_build_object('ok', true);\nend $$;\n\n-- ---------------------------------------------------------------- organiser functions (need the PIN)\ncreate or replace function public.comp_admin_entries(p_pin text) returns jsonb\nlanguage plpgsql volatile security definer set search_path = comp, pg_temp as $$\ndeclare\n  err text := comp.pin_error(p_pin);\nbegin\n  if err is not null then\n    return jsonb_build_object('error', err);\n  end if;\n  return jsonb_build_object(\n    'ok', true,\n    'settings', comp.settings_json(),\n    'sessions', (select jsonb_agg(jsonb_build_object('id', id, 'title', title, 'instructor', instructor) order by id) from comp.sessions),\n    'categories', (select jsonb_agg(jsonb_build_object('id', id, 'label', label) order by sort) from comp.categories),\n    'entries', coalesce((\n      select jsonb_agg(comp.entry_json(e, '') order by e.session_id, e.category, x.vc desc, e.created_at)\n      from comp.entries e\n      cross join lateral (select count(*) as vc from comp.votes v where v.entry_id = e.id) x), '[]'::jsonb));\nend $$;\n\ncreate or replace function public.comp_admin_update(\n  p_pin text, p_submissions boolean default null, p_voting boolean default null, p_title text default null\n) returns jsonb\nlanguage plpgsql volatile security definer set search_path = comp, pg_temp as $$\ndeclare\n  err text := comp.pin_error(p_pin);\nbegin\n  if err is not null then\n    return jsonb_build_object('error', err);\n  end if;\n  update comp.config set\n    submissions_open = coalesce(p_submissions, submissions_open),\n    voting_open = coalesce(p_voting, voting_open),\n    event_title = coalesce(nullif(comp.clean(p_title, 60), ''), event_title)\n  where id = 1;\n  return jsonb_build_object('ok', true, 'settings', comp.settings_json());\nend $$;\n\ncreate or replace function public.comp_admin_delete(p_pin text, p_entry uuid) returns jsonb\nlanguage plpgsql volatile security definer set search_path = comp, pg_temp as $$\ndeclare\n  err text := comp.pin_error(p_pin);\nbegin\n  if err is not null then\n    return jsonb_build_object('error', err);\n  end if;\n  delete from comp.entries where id = p_entry;\n  return jsonb_build_object('ok', true);\nend $$;\n\ncreate or replace function public.comp_admin_clear(p_pin text, p_confirm text) returns jsonb\nlanguage plpgsql volatile security definer set search_path = comp, pg_temp as $$\ndeclare\n  err text := comp.pin_error(p_pin);\n  n int;\nbegin\n  if err is not null then\n    return jsonb_build_object('error', err);\n  end if;\n  if p_confirm is distinct from 'CLEAR' then\n    return jsonb_build_object('error', 'Type CLEAR to confirm.');\n  end if;\n  delete from comp.votes where true;\n  delete from comp.entries where true;\n  get diagnostics n = row_count;\n  return jsonb_build_object('ok', true, 'deleted', n);\nend $$;\n\n-- ---------------------------------------------------------------- permissions\nrevoke all on all tables in schema comp from public, anon, authenticated;\nrevoke all on all functions in schema comp from public, anon, authenticated;\ngrant usage on schema public to anon, authenticated;\ngrant execute on function\n  public.comp_overview(),\n  public.comp_entries(int, text),\n  public.comp_winners(),\n  public.comp_add_entry(text, int, text, text, text, text, text, text),\n  public.comp_vote(text, uuid),\n  public.comp_delete_own(text, uuid),\n  public.comp_admin_entries(text),\n  public.comp_admin_update(text, boolean, boolean, text),\n  public.comp_admin_delete(text, uuid),\n  public.comp_admin_clear(text, text)\nto anon, authenticated;\n\n-- ---------------------------------------------------------------- photo and PDF storage\ninsert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)\nvalues ('entries', 'entries', true, 15728640, array['image/jpeg', 'application/pdf'])\non conflict (id) do update set\n  public = true,\n  file_size_limit = excluded.file_size_limit,\n  allowed_mime_types = excluded.allowed_mime_types;\n\ndo $$\nbegin\n  if not exists (select 1 from pg_policies where schemaname = 'storage' and tablename = 'objects' and policyname = 'competition uploads') then\n    create policy \"competition uploads\" on storage.objects for insert to anon, authenticated\n      with check (bucket_id = 'entries' and name ~ '^[0-9a-f]{32}(-t)?\\.(jpg|pdf)$');\n  end if;\n  if not exists (select 1 from pg_policies where schemaname = 'storage' and tablename = 'objects' and policyname = 'competition read') then\n    create policy \"competition read\" on storage.objects for select to anon, authenticated\n      using (bucket_id = 'entries');\n  end if;\nend $$;\n\nnotify pgrst, 'reload schema';\n\n-- ---------------------------------------------------------------- done\nselect admin_pin as \"Your organiser PIN (keep it private)\" from comp.config where id = 1;\n";
+  const SETUP_SQL = "-- Workshop notes competition: Supabase setup (version 2).\n-- One entry per person per session; people can vote for as many entries as they like.\n-- Paste all of this into Supabase > SQL Editor and press Run.\n-- Safe to run again: it keeps existing entries and votes.\n-- Upgrading from version 1 (Summary / Notes / Mind map) clears test entries and votes once.\n\n-- ---------------------------------------------------------------- private tables\ncreate schema if not exists comp;\nrevoke all on schema comp from public, anon, authenticated;\n\n-- One-time upgrade from version 1: remove the old category structure.\ndo $$\nbegin\n  if exists (select 1 from information_schema.columns\n             where table_schema = 'comp' and table_name = 'entries' and column_name = 'category') then\n    drop function if exists public.comp_add_entry(text, int, text, text, text, text, text, text);\n    drop table if exists comp.votes, comp.entries, comp.categories cascade;\n  end if;\n  -- Votes used to be one per session; now one per entry. Rebuild the table if it has the old key.\n  if to_regclass('comp.votes') is not null and not exists (\n       select 1 from pg_index i\n       join pg_attribute a on a.attrelid = i.indrelid and a.attnum = any (i.indkey)\n       where i.indrelid = to_regclass('comp.votes') and i.indisprimary and a.attname = 'entry_id') then\n    drop table comp.votes;\n  end if;\nend $$;\n\ncreate table if not exists comp.config (\n  id int primary key default 1 check (id = 1),\n  event_title text not null default 'Mapping the Islamic Sciences',\n  admin_pin text not null,\n  submissions_open boolean not null default true,\n  voting_open boolean not null default true\n);\n\ncreate table if not exists comp.sessions (\n  id int primary key,\n  title text not null,\n  instructor text not null default ''\n);\n\ncreate table if not exists comp.entries (\n  id uuid primary key default gen_random_uuid(),\n  session_id int not null references comp.sessions (id) on delete cascade,\n  name text not null,\n  title text not null default '',\n  kind text not null check (kind in ('image', 'pdf')),\n  file_path text not null,\n  thumb_path text,\n  owner text not null,\n  created_at timestamptz not null default now(),\n  unique (owner, session_id)\n);\n\ncreate table if not exists comp.votes (\n  voter text not null,\n  session_id int not null,\n  entry_id uuid not null references comp.entries (id) on delete cascade,\n  created_at timestamptz not null default now(),\n  primary key (voter, entry_id)\n);\ncreate index if not exists votes_entry_idx on comp.votes (entry_id);\ncreate index if not exists votes_voter_session_idx on comp.votes (voter, session_id);\n\ncreate table if not exists comp.admin_fails (\n  at timestamptz not null default now()\n);\n\nalter table comp.config enable row level security;\nalter table comp.sessions enable row level security;\nalter table comp.entries enable row level security;\nalter table comp.votes enable row level security;\nalter table comp.admin_fails enable row level security;\n\n-- ---------------------------------------------------------------- your sessions\ninsert into comp.sessions (id, title, instructor) values\n  (1, 'Why Do We Seek Knowledge?', 'Ust Mohamed Bouras'),\n  (2, 'Introduction to the Arabic Sciences', 'Sh Ibrahim Abu Saleh'),\n  (3, 'Introduction to the Qur’anic Sciences', 'Sh Abu Zaid Omran'),\n  (4, 'Introduction to Tazkiyah & Suluk', 'Sh Abdulqadir Jama'),\n  (5, 'Introduction to Aqidah', 'Sh Bahdon Robleh'),\n  (6, 'Introduction to Hadith', 'Sh Ibrahim Abu Saleh'),\n  (7, 'Introduction to the Seerah', 'Ust Mohamed Bouras'),\n  (8, 'Introduction to Mustalah al-Hadith', 'Sh Anwar Alahwazi'),\n  (9, 'Introduction to Fiqh & Usul al-Fiqh', 'Sh Ali Aljalabneh')\non conflict (id) do update set title = excluded.title, instructor = excluded.instructor;\n\n-- An 8-digit organiser PIN, made once.\ninsert into comp.config (id, admin_pin)\nvalues (1, lpad(((('x' || substr(replace(gen_random_uuid()::text, '-', ''), 1, 8))::bit(32)::bigint) % 100000000)::text, 8, '0'))\non conflict (id) do nothing;\n\n-- Use the course name as the heading unless you've already renamed it.\nupdate comp.config set event_title = 'Mapping the Islamic Sciences'\nwhere id = 1 and event_title = 'Workshop notes competition';\n\n-- ---------------------------------------------------------------- helpers (private)\ncreate or replace function comp.device_ok(p text) returns boolean\nlanguage sql immutable as $$ select coalesce(p ~ '^[a-zA-Z0-9-]{16,64}$', false) $$;\n\ncreate or replace function comp.clean(p text, n int) returns text\nlanguage sql immutable as $$\n  select left(btrim(regexp_replace(regexp_replace(coalesce(p, ''), '[[:cntrl:]]', ' ', 'g'), '\\s+', ' ', 'g')), n)\n$$;\n\ncreate or replace function comp.settings_json() returns jsonb\nlanguage sql stable set search_path = comp, pg_temp as $$\n  select jsonb_build_object('title', event_title, 'submissionsOpen', submissions_open, 'votingOpen', voting_open)\n  from comp.config where id = 1\n$$;\n\ncreate or replace function comp.entry_json(e comp.entries, p_device text) returns jsonb\nlanguage sql stable set search_path = comp, pg_temp as $$\n  select jsonb_build_object(\n    'id', e.id, 'session', e.session_id,\n    'name', e.name, 'title', e.title, 'kind', e.kind,\n    'file', e.file_path, 'thumb', e.thumb_path,\n    'votes', (select count(*) from comp.votes v where v.entry_id = e.id),\n    'createdAt', (extract(epoch from e.created_at) * 1000)::bigint,\n    'mine', coalesce(p_device \u003c> '' and e.owner = p_device, false))\n$$;\n\n-- Ranked entries for one session (most votes first, earliest first on ties).\ncreate or replace function comp.ranked(p_session int, p_device text, p_limit int default null) returns jsonb\nlanguage sql stable set search_path = comp, pg_temp as $$\n  select coalesce(jsonb_agg(t.j order by t.vc desc, t.created_at), '[]'::jsonb)\n  from (\n    select comp.entry_json(e, p_device) as j, x.vc, e.created_at\n    from comp.entries e\n    cross join lateral (select count(*) as vc from comp.votes v where v.entry_id = e.id) x\n    where e.session_id = p_session\n    order by x.vc desc, e.created_at\n    limit p_limit) t\n$$;\n\ncreate or replace function comp.pin_error(p_pin text) returns text\nlanguage plpgsql volatile set search_path = comp, pg_temp as $$\nbegin\n  delete from comp.admin_fails where at \u003c now() - interval '1 day';\n  if (select count(*) from comp.admin_fails where at > now() - interval '10 minutes') >= 20 then\n    return 'Too many wrong PINs. Wait 10 minutes and try again.';\n  end if;\n  if btrim(coalesce(p_pin, '')) = (select admin_pin from comp.config where id = 1) then\n    return null;\n  end if;\n  insert into comp.admin_fails default values;\n  return 'That PIN is not correct.';\nend $$;\n\n-- ---------------------------------------------------------------- public functions (what the website calls)\ncreate or replace function public.comp_overview() returns jsonb\nlanguage sql stable security definer set search_path = comp, pg_temp as $$\n  select jsonb_build_object(\n    'settings', comp.settings_json(),\n    'sessions', coalesce((\n      select jsonb_agg(jsonb_build_object(\n        'id', s.id, 'title', s.title, 'instructor', s.instructor,\n        'count', (select count(*) from comp.entries e where e.session_id = s.id)\n      ) order by s.id)\n      from comp.sessions s), '[]'::jsonb))\n$$;\n\ncreate or replace function public.comp_entries(p_session int, p_device text default '') returns jsonb\nlanguage plpgsql stable security definer set search_path = comp, pg_temp as $$\ndeclare\n  d text := case when comp.device_ok(p_device) then p_device else '' end;\nbegin\n  if not exists (select 1 from comp.sessions where id = p_session) then\n    raise exception 'That session does not exist.';\n  end if;\n  return jsonb_build_object(\n    'settings', comp.settings_json(),\n    'entries', comp.ranked(p_session, d),\n    'myVotes', (select coalesce(jsonb_agg(v.entry_id), '[]'::jsonb)\n                from comp.votes v where d \u003c> '' and v.voter = d and v.session_id = p_session));\nend $$;\n\ncreate or replace function public.comp_winners() returns jsonb\nlanguage sql stable security definer set search_path = comp, pg_temp as $$\n  select jsonb_build_object(\n    'settings', comp.settings_json(),\n    'sessions', coalesce((\n      select jsonb_agg(jsonb_build_object(\n        'id', s.id, 'title', s.title, 'instructor', s.instructor,\n        'top', comp.ranked(s.id, '', 3)\n      ) order by s.id)\n      from comp.sessions s), '[]'::jsonb))\n$$;\n\ncreate or replace function public.comp_add_entry(\n  p_device text, p_session int, p_name text, p_title text,\n  p_kind text, p_file text, p_thumb text default null\n) returns jsonb\nlanguage plpgsql volatile security definer set search_path = comp, pg_temp as $$\ndeclare\n  v_name text := comp.clean(p_name, 40);\n  v_title text := comp.clean(p_title, 80);\n  e comp.entries;\nbegin\n  if not (select submissions_open from comp.config where id = 1) then\n    raise exception 'Entries are closed.';\n  end if;\n  if not comp.device_ok(p_device) then\n    raise exception 'Reload the page and try again.';\n  end if;\n  if not exists (select 1 from comp.sessions where id = p_session) then\n    raise exception 'Choose a session.';\n  end if;\n  if v_name = '' then\n    raise exception 'Enter your name.';\n  end if;\n  if p_kind = 'image' then\n    if coalesce(p_file, '') !~ '^[0-9a-f]{32}\\.jpg$' or coalesce(p_thumb, '') !~ '^[0-9a-f]{32}-t\\.jpg$' then\n      raise exception 'The upload could not be read. Try again.';\n    end if;\n  elsif p_kind = 'pdf' then\n    if coalesce(p_file, '') !~ '^[0-9a-f]{32}\\.pdf$' then\n      raise exception 'The upload could not be read. Try again.';\n    end if;\n    p_thumb := null;\n  else\n    raise exception 'Only photos and PDF files are accepted.';\n  end if;\n  if (select count(*) from comp.entries) >= 3000 then\n    raise exception 'The competition is full.';\n  end if;\n\n  insert into comp.entries (session_id, name, title, kind, file_path, thumb_path, owner)\n  values (p_session, v_name, v_title, p_kind, p_file, p_thumb, p_device)\n  on conflict (owner, session_id) do nothing\n  returning * into e;\n\n  if e.id is null then\n    raise exception 'You already posted in this session. Delete your entry first to replace it.';\n  end if;\n  return comp.entry_json(e, p_device);\nend $$;\n\ncreate or replace function public.comp_vote(p_device text, p_entry uuid) returns jsonb\nlanguage plpgsql volatile security definer set search_path = comp, pg_temp as $$\ndeclare\n  e comp.entries;\n  gone uuid;\nbegin\n  if not (select voting_open from comp.config where id = 1) then\n    raise exception 'Voting is closed.';\n  end if;\n  if not comp.device_ok(p_device) then\n    raise exception 'Reload the page and try again.';\n  end if;\n  select * into e from comp.entries where id = p_entry;\n  if e.id is null then\n    raise exception 'That entry no longer exists.';\n  end if;\n  if e.owner = p_device then\n    raise exception 'You can’t vote for your own entry.';\n  end if;\n\n  -- Tap once to vote, tap again to take the vote back.\n  delete from comp.votes where voter = p_device and entry_id = e.id returning entry_id into gone;\n  if gone is null then\n    insert into comp.votes (voter, session_id, entry_id) values (p_device, e.session_id, e.id)\n    on conflict (voter, entry_id) do nothing;\n  end if;\n\n  return jsonb_build_object('voted', gone is null, 'votes', (select count(*) from comp.votes where entry_id = e.id));\nend $$;\n\ncreate or replace function public.comp_delete_own(p_device text, p_entry uuid) returns jsonb\nlanguage plpgsql volatile security definer set search_path = comp, pg_temp as $$\ndeclare\n  gone uuid;\nbegin\n  if not comp.device_ok(p_device) then\n    raise exception 'You can only delete your own entries.';\n  end if;\n  delete from comp.entries where id = p_entry and owner = p_device returning id into gone;\n  if gone is null then\n    raise exception 'You can only delete your own entries.';\n  end if;\n  return jsonb_build_object('ok', true);\nend $$;\n\n-- ---------------------------------------------------------------- organiser functions (need the PIN)\ncreate or replace function public.comp_admin_entries(p_pin text) returns jsonb\nlanguage plpgsql volatile security definer set search_path = comp, pg_temp as $$\ndeclare\n  err text := comp.pin_error(p_pin);\nbegin\n  if err is not null then\n    return jsonb_build_object('error', err);\n  end if;\n  return jsonb_build_object(\n    'ok', true,\n    'settings', comp.settings_json(),\n    'sessions', (\n      select jsonb_agg(jsonb_build_object('id', s.id, 'title', s.title, 'instructor', s.instructor,\n                                          'entries', comp.ranked(s.id, '')) order by s.id)\n      from comp.sessions s));\nend $$;\n\ncreate or replace function public.comp_admin_update(\n  p_pin text, p_submissions boolean default null, p_voting boolean default null, p_title text default null\n) returns jsonb\nlanguage plpgsql volatile security definer set search_path = comp, pg_temp as $$\ndeclare\n  err text := comp.pin_error(p_pin);\nbegin\n  if err is not null then\n    return jsonb_build_object('error', err);\n  end if;\n  update comp.config set\n    submissions_open = coalesce(p_submissions, submissions_open),\n    voting_open = coalesce(p_voting, voting_open),\n    event_title = coalesce(nullif(comp.clean(p_title, 60), ''), event_title)\n  where id = 1;\n  return jsonb_build_object('ok', true, 'settings', comp.settings_json());\nend $$;\n\ncreate or replace function public.comp_admin_delete(p_pin text, p_entry uuid) returns jsonb\nlanguage plpgsql volatile security definer set search_path = comp, pg_temp as $$\ndeclare\n  err text := comp.pin_error(p_pin);\nbegin\n  if err is not null then\n    return jsonb_build_object('error', err);\n  end if;\n  delete from comp.entries where id = p_entry;\n  return jsonb_build_object('ok', true);\nend $$;\n\ncreate or replace function public.comp_admin_clear(p_pin text, p_confirm text) returns jsonb\nlanguage plpgsql volatile security definer set search_path = comp, pg_temp as $$\ndeclare\n  err text := comp.pin_error(p_pin);\n  n int;\nbegin\n  if err is not null then\n    return jsonb_build_object('error', err);\n  end if;\n  if p_confirm is distinct from 'CLEAR' then\n    return jsonb_build_object('error', 'Type CLEAR to confirm.');\n  end if;\n  delete from comp.votes where true;\n  delete from comp.entries where true;\n  get diagnostics n = row_count;\n  return jsonb_build_object('ok', true, 'deleted', n);\nend $$;\n\n-- ---------------------------------------------------------------- permissions\nrevoke all on all tables in schema comp from public, anon, authenticated;\nrevoke all on all functions in schema comp from public, anon, authenticated;\ngrant usage on schema public to anon, authenticated;\ngrant execute on function\n  public.comp_overview(),\n  public.comp_entries(int, text),\n  public.comp_winners(),\n  public.comp_add_entry(text, int, text, text, text, text, text),\n  public.comp_vote(text, uuid),\n  public.comp_delete_own(text, uuid),\n  public.comp_admin_entries(text),\n  public.comp_admin_update(text, boolean, boolean, text),\n  public.comp_admin_delete(text, uuid),\n  public.comp_admin_clear(text, text)\nto anon, authenticated;\n\n-- ---------------------------------------------------------------- photo and PDF storage\ninsert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)\nvalues ('entries', 'entries', true, 15728640, array['image/jpeg', 'application/pdf'])\non conflict (id) do update set\n  public = true,\n  file_size_limit = excluded.file_size_limit,\n  allowed_mime_types = excluded.allowed_mime_types;\n\ndo $$\nbegin\n  if not exists (select 1 from pg_policies where schemaname = 'storage' and tablename = 'objects' and policyname = 'competition uploads') then\n    create policy \"competition uploads\" on storage.objects for insert to anon, authenticated\n      with check (bucket_id = 'entries' and name ~ '^[0-9a-f]{32}(-t)?\\.(jpg|pdf)$');\n  end if;\n  if not exists (select 1 from pg_policies where schemaname = 'storage' and tablename = 'objects' and policyname = 'competition read') then\n    create policy \"competition read\" on storage.objects for select to anon, authenticated\n      using (bucket_id = 'entries');\n  end if;\nend $$;\n\nnotify pgrst, 'reload schema';\n\n-- ---------------------------------------------------------------- done\nselect admin_pin as \"Your organiser PIN (keep it private)\" from comp.config where id = 1;\n";
   const BUCKET = 'entries';
   const MAX_PDF = 15 * 1024 * 1024;
   const MAX_IMAGE_IN = 60 * 1024 * 1024;
@@ -3087,7 +3087,7 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 
   // ------------------------------------------------------------ page frame
   const leaveHandlers = [];
-  let eventTitle = 'Workshop notes competition';
+  let eventTitle = 'Mapping the Islamic Sciences';
 
   function poll(fn, ms) {
     const t = setInterval(() => {
@@ -3111,7 +3111,7 @@ https://github.com/nodeca/pako/blob/main/LICENSE
       : null;
     const main = h('main', { class: wide ? 'wide' : '' });
     appEl.replaceChildren(...[
-      h('header', { class: 'bar' },
+      h('header', { class: wide ? 'bar wide' : 'bar' },
         h('div', { class: 'bar-inner' },
           h('a', { class: 'brand', href: '#/' }, eventTitle),
           navLink ? h('nav', { class: 'nav' }, navLink) : null)),
@@ -3276,19 +3276,30 @@ https://github.com/nodeca/pako/blob/main/LICENSE
   }
 
   // ------------------------------------------------------------ home
+  function shortTitle(t) {
+    return String(t).replace(/^introduction to (the )?/i, '');
+  }
+
+  function heroTitle(title) {
+    const m = String(title).match(/^(mapping the)\s+(.+)$/i);
+    return m
+      ? [h('p', { class: 'kicker caps' }, m[1]), h('h1', {}, m[2])]
+      : [h('h1', {}, title)];
+  }
+
   async function homeView() {
     const main = shell();
+    const hero = h('section', { class: 'hero' });
     const notices = h('div');
-    const list = h('ol', { class: 'toc' });
+    const list = h('ol', { class: 'tiles' });
     main.append(
-      h('section', { class: 'intro' },
-        h('h1', {}, 'Post your session notes and vote for the best'),
-        h('p', {}, 'Choose a session, then add your summary, notes or mind map as a photo or PDF. Rankings update live while everyone votes.'),
-        h('ul', { class: 'rules' },
-          h('li', {}, 'One entry per category in each session.'),
-          h('li', {}, 'One vote per category in each session.'),
-          h('li', {}, 'You can’t vote for your own entry.'))),
+      hero,
+      h('ul', { class: 'rules' },
+        h('li', {}, 'Post one entry in each session: a summary, notes or a mind map, as a photo or PDF.'),
+        h('li', {}, 'Vote for as many entries as you like. Tap again to take a vote back.'),
+        h('li', {}, 'You can’t vote for your own entry. Rankings update live.')),
       notices,
+      h('p', { class: 'section-label caps' }, 'Choose a session:'),
       list
     );
 
@@ -3299,15 +3310,17 @@ https://github.com/nodeca/pako/blob/main/LICENSE
       const key = JSON.stringify(m);
       if (key === shown) return;
       shown = key;
+      hero.replaceChildren(
+        ...heroTitle(m.settings.title),
+        h('p', { class: 'sub caps' }, 'Notes competition'),
+        h('p', { class: 'lead' }, 'Share what you took from each session, and vote for the notes that capture it best.'));
       notices.replaceChildren(...noticesFor(m.settings));
-      list.replaceChildren(...m.sessions.map((s) => {
-        const total = Object.values(s.counts).reduce((a, b) => a + b, 0);
-        return h('li', {},
+      list.replaceChildren(...m.sessions.map((s) =>
+        h('li', {},
           h('a', { href: `#/s/${s.id}` },
-            h('span', { class: 'num' }, s.id),
-            h('span', {}, h('span', { class: 't' }, s.title), h('br'), h('span', { class: 'who' }, s.instructor)),
-            h('span', { class: 'count' }, plural(total, 'entry', 'entries'))));
-      }));
+            h('span', { class: 't' }, shortTitle(s.title)),
+            h('span', { class: 'who' }, s.instructor),
+            h('span', { class: 'count' }, plural(s.count, 'entry', 'entries'))))));
     }
     try {
       await refresh();
@@ -3319,7 +3332,7 @@ https://github.com/nodeca/pako/blob/main/LICENSE
   }
 
   // ------------------------------------------------------------ session page
-  async function sessionView(id, catId) {
+  async function sessionView(id) {
     const main = shell();
     main.append(h('p', { class: 'muted' }, 'Loading…'));
 
@@ -3335,18 +3348,21 @@ https://github.com/nodeca/pako/blob/main/LICENSE
       main.replaceChildren(h('p', {}, 'That session doesn’t exist.'), h('p', {}, h('a', { href: '#/' }, 'Back to all sessions')));
       return;
     }
-    const cat = m.categories.find((c) => c.id === catId) || m.categories[0];
-    const lc = cat.label.toLowerCase();
 
-    const tabsEl = h('nav', { class: 'tabs', 'aria-label': 'Categories' });
     const noticesEl = h('div');
-    const actionsEl = h('div', { class: 'actions' });
+    const ctaEl = h('div', { class: 'post-cta' });
+    const countEl = h('span', { class: 'muted small' });
     const listEl = h('ul', { class: 'entries' });
 
     main.replaceChildren(
       h('a', { class: 'back', href: '#/' }, 'All sessions'),
-      h('header', { class: 'head' }, h('h1', {}, session.title), h('p', { class: 'muted' }, session.instructor)),
-      tabsEl, noticesEl, actionsEl, listEl
+      h('header', { class: 'head' },
+        h('p', { class: 'kicker caps' }, `Session ${session.id}`),
+        h('h1', {}, session.title),
+        h('p', { class: 'who' }, session.instructor)),
+      noticesEl, ctaEl,
+      h('div', { class: 'list-head' }, h('span', { class: 'caps' }, 'Ranking'), countEl),
+      listEl
     );
 
     let data = null;
@@ -3358,29 +3374,32 @@ https://github.com/nodeca/pako/blob/main/LICENSE
     }
 
     function draw() {
-      const { entries, myVotes, settings } = data;
+      const { entries, settings } = data;
+      const myVotes = new Set(data.myVotes || []);
       const key = JSON.stringify(data);
       if (key === shown) return;
       shown = key;
 
-      tabsEl.replaceChildren(...m.categories.map((c) => {
-        const n = entries.filter((e) => e.category === c.id).length;
-        return h('a', { href: `#/s/${id}/${c.id}`, 'aria-current': c.id === cat.id ? 'page' : null },
-          c.label, h('small', {}, plural(n, 'entry', 'entries')));
-      }));
-
       noticesEl.replaceChildren(...noticesFor(settings));
-      actionsEl.replaceChildren(h('button', {
-        class: 'btn', type: 'button', disabled: !settings.submissionsOpen,
-        onclick: () => openAddDialog(session, cat, refresh),
-      }, `Add your ${lc}`));
+      const posted = entries.some((e) => e.mine);
+      ctaEl.replaceChildren(
+        h('button', {
+          class: 'btn', type: 'button', disabled: !settings.submissionsOpen || posted,
+          onclick: () => openAddDialog(session, refresh),
+        }, posted ? 'You’ve posted in this session' : 'Post your notes'),
+        h('p', {}, posted
+          ? 'To replace your entry, delete it below and post again.'
+          : 'A summary, notes or a mind map. Take a photo of your page or choose a PDF.'));
 
-      const list = entries.filter((e) => e.category === cat.id);
-      if (!list.length) {
-        listEl.replaceChildren(h('li', { class: 'empty' }, 'No entries in this category yet. Be the first to post.'));
+      countEl.textContent = myVotes.size
+        ? `${plural(entries.length, 'entry', 'entries')}, you voted for ${myVotes.size}`
+        : plural(entries.length, 'entry', 'entries');
+
+      if (!entries.length) {
+        listEl.replaceChildren(h('li', { class: 'empty' }, 'No entries in this session yet. Be the first to post.'));
         return;
       }
-      listEl.replaceChildren(...rankEntries(list).map(({ e, rank }) => entryRow(e, rank, myVotes[cat.id] === e.id, settings)));
+      listEl.replaceChildren(...rankEntries(entries).map(({ e, rank }) => entryRow(e, rank, myVotes.has(e.id), settings)));
     }
 
     function entryRow(e, rank, voted, settings) {
@@ -3438,8 +3457,7 @@ https://github.com/nodeca/pako/blob/main/LICENSE
   }
 
   // ------------------------------------------------------------ add entry
-  function openAddDialog(session, cat, onDone) {
-    const lc = cat.label.toLowerCase();
+  function openAddDialog(session, onDone) {
     const nameInput = h('input', { id: 'f-name', type: 'text', maxlength: 40, autocomplete: 'name', value: store.get('wc_name') || '' });
     const titleInput = h('input', { id: 'f-title', type: 'text', maxlength: 80, placeholder: 'Optional' });
     const fileInput = h('input', { id: 'f-file', type: 'file', accept: 'image/*,application/pdf,.pdf' });
@@ -3450,14 +3468,14 @@ https://github.com/nodeca/pako/blob/main/LICENSE
     const cancel = h('button', { class: 'btn quiet', type: 'button' }, 'Cancel');
 
     const form = h('form', { class: 'sheet', novalidate: true },
-      h('h2', {}, `Add your ${lc}`),
+      h('h2', {}, 'Post your notes'),
       h('p', { class: 'muted' }, `${session.title}, ${session.instructor}`),
       h('div', { class: 'field' }, h('label', { for: 'f-name' }, 'Your name'), nameInput),
       h('div', { class: 'field' }, h('label', { for: 'f-title' }, 'Title'), titleInput),
       h('div', { class: 'field' },
         h('label', { for: 'f-file' }, 'Photo or PDF'),
         fileInput,
-        h('span', { class: 'hint' }, 'Take a photo of your page, or choose a photo or PDF. PDFs up to 15 MB. One entry per category.')),
+        h('span', { class: 'hint' }, 'Your summary, notes or mind map. Take a photo of your page, or choose a photo or PDF (up to 15 MB). One entry per session.')),
       errorEl, bar, status,
       h('div', { class: 'row' }, cancel, submit));
 
@@ -3503,7 +3521,7 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 
         status.textContent = 'Saving…';
         await rpc('comp_add_entry', {
-          p_device: device, p_session: session.id, p_category: cat.id,
+          p_device: device, p_session: session.id,
           p_name: name, p_title: titleInput.value.trim(),
           p_kind: prepared.kind, p_file: mainPath, p_thumb: thumbPath,
         });
@@ -3542,7 +3560,12 @@ https://github.com/nodeca/pako/blob/main/LICENSE
   async function winnersView() {
     const main = shell({ wide: true, nav: 'home' });
     const box = h('div', { class: 'winners' });
-    main.append(h('h1', {}, 'Winners'), h('p', { class: 'muted lede' }, 'Top three in each category. This page updates live.'), box);
+    main.append(
+      h('header', { class: 'winners-head' },
+        h('p', { class: 'kicker caps' }, 'Notes competition'),
+        h('h1', {}, 'Winners'),
+        h('p', { class: 'muted' }, 'Top three in each session. This page updates live.')),
+      box);
 
     let shown = '';
     async function refresh() {
@@ -3551,27 +3574,24 @@ https://github.com/nodeca/pako/blob/main/LICENSE
       const key = JSON.stringify(d);
       if (key === shown) return;
       shown = key;
-      box.replaceChildren(...d.sessions.map((s) =>
-        h('section', { class: 'w-session' },
-          h('header', {}, h('h2', {}, s.title), h('p', {}, s.instructor)),
-          h('div', { class: 'w-cats' }, ...s.categories.map((c) => {
-            const ranked = rankEntries(c.top);
-            const first = ranked[0];
-            return h('div', { class: 'w-cat' },
-              h('h3', {}, c.label),
-              first && first.e.kind === 'image' && first.e.votes > 0
-                ? h('img', { class: 'w-photo', src: fileUrl(first.e.thumb || first.e.file), alt: `${first.e.title || 'Top entry'} by ${first.e.name}`, loading: 'lazy' })
-                : null,
-              ranked.length
-                ? h('div', { class: 'w-list' }, ...ranked.map(({ e, rank }) =>
-                  h('div', { class: 'w-item' + (rank === 1 && e.votes > 0 ? ' first' : '') },
-                    h('span', { class: 'rank' }, rank),
-                    h('div', {},
-                      h('a', { class: 't', href: fileUrl(e.file), target: '_blank', rel: 'noopener' }, e.title || 'Untitled'),
-                      h('div', { class: 'by' }, e.name)),
-                    h('span', { class: 'v' }, plural(e.votes, 'vote', 'votes')))))
-                : h('p', { class: 'muted' }, 'No entries yet.'));
-          })))));
+      box.replaceChildren(...d.sessions.map((s) => {
+        const ranked = rankEntries(s.top);
+        const first = ranked[0];
+        return h('section', { class: 'w-card' },
+          h('header', {}, h('span', { class: 't' }, shortTitle(s.title)), h('span', { class: 'who' }, s.instructor)),
+          first && first.e.kind === 'image' && first.e.votes > 0
+            ? h('img', { class: 'w-photo', src: fileUrl(first.e.thumb || first.e.file), alt: `${first.e.title || 'Top entry'} by ${first.e.name}`, loading: 'lazy' })
+            : null,
+          ranked.length
+            ? h('div', { class: 'w-list' }, ...ranked.map(({ e, rank }) =>
+              h('div', { class: 'w-item' + (rank === 1 && e.votes > 0 ? ' first' : '') },
+                h('span', { class: 'rank' }, rank),
+                h('div', {},
+                  h('a', { class: 'name', href: fileUrl(e.file), target: '_blank', rel: 'noopener' }, e.name),
+                  e.title ? h('div', { class: 'by' }, e.title) : null),
+                h('span', { class: 'v' }, plural(e.votes, 'vote', 'votes')))))
+            : h('p', { class: 'muted' }, 'No entries yet.'));
+      }));
     }
     try {
       await refresh();
@@ -3587,12 +3607,9 @@ https://github.com/nodeca/pako/blob/main/LICENSE
   }
 
   function csvCell(v) {
-    const s = String(v == null ? '' : v);
-    return /[",\n\r]/.test(s) || /^[=+\-@]/.test(s) ? `"${s.replace(/^([=+\-@])/, "'$1").replace(/"/g, '""')}"` : s;
-  }
-
-  function rankedFor(entries, sessionId, catId) {
-    return rankEntries(entries.filter((e) => e.session === sessionId && e.category === catId).sort((a, b) => b.votes - a.votes || a.createdAt - b.createdAt));
+    let s = String(v == null ? '' : v);
+    if (/^[=+\-@]/.test(s)) s = "'" + s;
+    return /[",\n\r']/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
   }
 
   async function adminView() {
@@ -3628,6 +3645,7 @@ https://github.com/nodeca/pako/blob/main/LICENSE
         return main.replaceChildren(h('p', { class: 'error' }, e.message));
       }
       setTitle(d.settings.title);
+      const total = d.sessions.reduce((n, s) => n + s.entries.length, 0);
 
       const act = async (fn, args, okMsg) => {
         try {
@@ -3652,41 +3670,37 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 
       const titleIn = h('input', { id: 'a-title', type: 'text', maxlength: 60, value: d.settings.title });
       const titleForm = h('form', { class: 'inline-form', novalidate: true },
-        h('div', { class: 'field' }, h('label', { for: 'a-title' }, 'Competition name'), titleIn),
-        h('button', { class: 'btn small', type: 'submit' }, 'Save name'));
+        h('div', { class: 'field' }, h('label', { for: 'a-title' }, 'Heading'), titleIn),
+        h('button', { class: 'btn small', type: 'submit' }, 'Save heading'));
       titleForm.addEventListener('submit', async (ev) => {
         ev.preventDefault();
-        const r = await act('comp_admin_update', { p_title: titleIn.value }, 'Name saved.');
+        const r = await act('comp_admin_update', { p_title: titleIn.value }, 'Heading saved.');
         if (r) setTitle(r.settings.title);
       });
 
       // downloads
-      const sessionSelect = h('select', { id: 'a-session' }, ...d.sessions.map((s) => h('option', { value: s.id }, `${s.id}. ${s.title}`)));
+      const sessionSelect = h('select', { id: 'a-session' }, ...d.sessions.map((s) => h('option', { value: s.id }, `${s.id}. ${shortTitle(s.title)}`)));
       const zipStatus = h('p', { class: 'muted', role: 'status' });
       const zipBtn = h('button', { class: 'btn small', type: 'button' }, 'Download photos and PDFs');
       zipBtn.addEventListener('click', async () => {
-        const sid = Number(sessionSelect.value);
-        const s = d.sessions.find((x) => x.id === sid);
-        const items = [];
-        for (const c of d.categories) {
-          for (const { e, rank } of rankedFor(d.entries, sid, c.id)) items.push({ e, rank, c });
-        }
+        const s = d.sessions.find((x) => x.id === Number(sessionSelect.value));
+        const items = rankEntries(s.entries);
         if (!items.length) { toast('No entries in that session yet.'); return; }
         zipBtn.disabled = true;
         try {
           const zip = new window.JSZip();
           let i = 0;
-          for (const { e, rank, c } of items) {
+          for (const { e, rank } of items) {
             i += 1;
             zipStatus.textContent = `Adding ${i} of ${items.length}…`;
             const res = await fetch(fileUrl(e.file));
             if (!res.ok) continue;
             const ext = e.kind === 'pdf' ? 'pdf' : 'jpg';
-            zip.file(`${safeName(c.label)}/${String(rank).padStart(2, '0')}-${plural(e.votes, 'vote', 'votes').replace(' ', '')}-${safeName(e.name)}-${safeName(e.title)}-${e.id.slice(0, 4)}.${ext}`, await res.blob());
+            zip.file(`${String(rank).padStart(2, '0')}-${plural(e.votes, 'vote', 'votes').replace(' ', '')}-${safeName(e.name)}-${safeName(e.title)}-${e.id.slice(0, 4)}.${ext}`, await res.blob());
           }
           zipStatus.textContent = 'Making the zip…';
           const blob = await zip.generateAsync({ type: 'blob', compression: 'STORE' });
-          saveBlob(blob, `session-${sid}-${safeName(s.title)}.zip`);
+          saveBlob(blob, `session-${s.id}-${safeName(shortTitle(s.title))}.zip`);
           zipStatus.textContent = 'Downloaded.';
         } catch {
           zipStatus.textContent = 'The download failed. Try again on wifi.';
@@ -3698,12 +3712,10 @@ https://github.com/nodeca/pako/blob/main/LICENSE
       const csvBtn = h('button', {
         class: 'btn small quiet', type: 'button',
         onclick: () => {
-          const rows = [['Session', 'Instructor', 'Category', 'Rank', 'Votes', 'Name', 'Title', 'Type', 'File']];
+          const rows = [['Session', 'Instructor', 'Rank', 'Votes', 'Name', 'Title', 'Type', 'File']];
           for (const s of d.sessions) {
-            for (const c of d.categories) {
-              for (const { e, rank } of rankedFor(d.entries, s.id, c.id)) {
-                rows.push([s.title, s.instructor, c.label, rank, e.votes, e.name, e.title, e.kind, fileUrl(e.file)]);
-              }
+            for (const { e, rank } of rankEntries(s.entries)) {
+              rows.push([s.title, s.instructor, rank, e.votes, e.name, e.title, e.kind, fileUrl(e.file)]);
             }
           }
           const csv = '﻿' + rows.map((r) => r.map(csvCell).join(',')).join('\r\n');
@@ -3723,22 +3735,19 @@ https://github.com/nodeca/pako/blob/main/LICENSE
         if (r) { toast(`Deleted ${plural(r.deleted, 'entry', 'entries')}.`); panel(); }
       });
 
-      const groups = d.sessions.map((s) => {
-        const rows = d.entries.filter((e) => e.session === s.id);
-        if (!rows.length) return null;
-        return h('section', { class: 'admin-group' },
+      const groups = d.sessions.filter((s) => s.entries.length).map((s) =>
+        h('section', { class: 'admin-group' },
           h('h3', {}, s.title),
-          ...rows.map((e) => h('div', { class: 'admin-row' },
-            h('a', { class: 't', href: fileUrl(e.file), target: '_blank', rel: 'noopener' }, e.title || 'Untitled'),
-            h('span', { class: 'by' }, `${d.categories.find((c) => c.id === e.category).label}, ${e.name}, ${plural(e.votes, 'vote', 'votes')}`),
+          ...rankEntries(s.entries).map(({ e, rank }) => h('div', { class: 'admin-row' },
+            h('a', { class: 't', href: fileUrl(e.file), target: '_blank', rel: 'noopener' }, `${rank}. ${e.title || 'Untitled'}`),
+            h('span', { class: 'by' }, `${e.name}, ${plural(e.votes, 'vote', 'votes')}`),
             h('button', {
               class: 'btn small danger', type: 'button',
               onclick: async () => {
                 if (!confirm(`Delete “${e.title || 'Untitled'}” by ${e.name}?`)) return;
                 if (await act('comp_admin_delete', { p_entry: e.id }, 'Entry deleted.')) panel();
               },
-            }, 'Delete'))));
-      }).filter(Boolean);
+            }, 'Delete')))));
 
       main.replaceChildren(
         h('h1', { class: 'page-title' }, 'Organiser'),
@@ -3751,17 +3760,17 @@ https://github.com/nodeca/pako/blob/main/LICENSE
         h('div', { class: 'panel' },
           h('h2', {}, 'Download'),
           h('p', { class: 'muted' }, 'Save everything after the event, for example to Google Drive. Do one session at a time.'),
-          csvBtn,
+          h('div', { class: 'row start' }, csvBtn),
           h('div', { class: 'field' }, h('label', { for: 'a-session' }, 'Session'), sessionSelect),
           h('div', { class: 'row start' }, zipBtn),
           zipStatus),
-        h('h2', { class: 'section-title' }, `All entries (${d.entries.length})`),
+        h('h2', { class: 'section-title' }, `All entries (${total})`),
         ...(groups.length ? groups : [h('p', { class: 'empty' }, 'No entries yet.')]),
         h('div', { class: 'panel danger-zone' },
           h('h2', {}, 'Start fresh'),
           h('p', { class: 'muted' }, 'Use this after testing, before the event starts. It can’t be undone.'),
           clearForm),
-        h('p', { class: 'muted small' }, h('a', { href: '#/setup' }, 'Change the Supabase connection')));
+        h('p', { class: 'muted small' }, h('a', { href: '#/setup' }, 'Setup code and Supabase connection')));
     }
 
     if (pin()) panel();
@@ -3775,7 +3784,7 @@ https://github.com/nodeca/pako/blob/main/LICENSE
     const parts = (location.hash || '#/').slice(2).split('/').filter(Boolean);
     if (parts[0] === 'setup') return setupView();
     if (!conn) return setupView();
-    if (parts[0] === 's' && parts[1]) return sessionView(Number(parts[1]), parts[2]);
+    if (parts[0] === 's' && parts[1]) return sessionView(Number(parts[1]));
     if (parts[0] === 'winners') return winnersView();
     if (parts[0] === 'admin') return adminView();
     return homeView();
